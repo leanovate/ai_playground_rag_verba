@@ -1,5 +1,5 @@
 # Verba 
-## 🐕 The Golden RAGtriever
+## 🐕 The Golden RAGtriever - with Leanovate extensions
 
 Welcome to Verba: The Golden RAGtriever, an open-source application designed to offer an end-to-end, streamlined, and user-friendly interface for Retrieval-Augmented Generation (RAG) out of the box. In just a few easy steps, explore your datasets and extract insights with ease, either locally or through LLM providers such as OpenAI, Cohere, and HuggingFace.
 
@@ -22,12 +22,7 @@ pip install goldenverba
 - [🐍 Installing Python and Setting Up a Virtual Environment](#🐍-installing-python-and-setting-up-a-virtual-environment)
   - [Installing Python](#installing-python)
   - [Setting Up a Virtual Environment](#setting-up-a-virtual-environment)
-- [📦 Choosing the Right Verba Installation Package](#📦-choosing-the-right-verba-installation-package)
-  - [Default Package](#default-package)
-  - [HuggingFace Version](#huggingface-version)
-  - [Development Version](#development-version)
-- [🚀 Quickstart: Deploy with pip](#🚀-quickstart-deploy-with-pip)
-- [🛠️ Quickstart: Build from Source](#️🛠️-quickstart-build-from-source)
+- [🛠️ Quickstart: Build from Source with Leanovate extension](#️🛠️-quickstart-build-from-source)
 - [🔑 API Keys](#🔑-api-keys)
   - [Weaviate](#weaviate)
   - [OpenAI](#openai)
@@ -36,6 +31,7 @@ pip install goldenverba
     - [Llama2](#llama2)
   - [Unstructured](#unstructured)
   - [Github](#github)
+  - [Confluence](#confluence)
 - [🐳 Quickstart: Deploy with Docker](#🐳-quickstart-deploy-with-docker)
   - [Large Language Model (LLM) Costs](#-large-language-model-llm-costs)
 - [💾 Importing Your Data into Verba](#️💾-Importing-Your-Data-into-Verba)
@@ -77,10 +73,6 @@ git clone https://github.com/weaviate/Verba
 
 pip install -e .
 ```
-- Use Docker for Deployment [(Quickstart)](##🐳-Quickstart:-Deploy-with-Docker)
-
-**Prerequisites**: If you're not using Docker, ensure that you have `Python >=3.9.0` installed on your system.
-
 # 🐍 Installing Python and Setting Up a Virtual Environment
 Before you can use Verba, you'll need to ensure that `Python >=3.9.0` is installed on your system and that you can create a virtual environment for a safer and cleaner project setup.
 
@@ -151,88 +143,44 @@ After that all your commits will be automatically linted and formatted. The lint
 
 `make pre-commit` formats all files in the repository and install the hooks if needed.
 
-# 📦 Choosing the Right Verba Installation Package
-Verba comes in several installation packages, each tailored for specific use cases and environments. Choose the package that aligns with your requirements:
-
-## Default Package
-The default package is perfect for getting started quickly and includes support for popular models and services like OpenAI, Cohere, and spaCy. This package is suitable for general use and can be installed easily via pip:
-
-```
-pip install goldenverba
-```
-
-> This will set you up with all you need to integrate Verba with these services without additional configuration.
-
-## HuggingFace Version
-For those looking to leverage models from the HuggingFace ecosystem, including `SentenceTransformer` and `LLama2`, the HuggingFace version is the ideal choice. This package is optimized for GPU usage to accommodate the high performance demands of these models:
-
-```
-pip install goldenverba[huggingface]
-```
-
-> Note: It's recommended to run this version on a system with a GPU to fully utilize the capabilities of the advanced models.
-
-## Development Version
-If you're a developer looking to contribute to Verba or need the latest features still in development, the dev version is what you're looking for. This version may be less stable but offers the cutting edge of Verba's capabilities:
-
-```
-pip install goldenverba[dev]
-```
-
-> Keep in mind that this version is intended for development purposes and may contain experimental features.
-
-# 🚀 Quickstart: Deploy with pip
+# 🛠️ Quickstart: Build from Source with leanovate extensions
 
 1. **Initialize a new Python Environment**
-```
+```r
 python3 -m virtualenv venv
 ```
 
-2. **Install Verba**
+2.**Install Verba**
 ```
-pip install goldenverba
+pip install -e .[dev,confluence,unstructured]
 ```
 
-3. **Launch Verba**
+3.**Create .env file and add environment variables**
+```
+cp goldenverba/.env-example to goldenverba/.env
+xdg-edit goldenveba/.env
+```
+> To use the LEANOVATE extensions add  the CONFLUENCE and COHERE (or diffrent LLM) api keys.
+
+4.**Launch Verba**
 ```
 verba start
 ```
-
-4. **Access Verba**
+5.**Access Verba**
 ```
 Visit localhost:8000
 ```
 
-5. **Create .env file and add environment variables**
+6.**Add documents**
 
-# 🛠️ Quickstart: Build from Source
-
-1. **Clone the Verba repos**
+Add confluence space pages from command line:
 ```
-git clone https://github.com/weaviate/Verba.git
+verba load --embedder CohereEmbedder --units 60 --overlap 10 --reader ConfluenceReader --path AL
 ```
-
-2. **Initialize a new Python Environment**
+Add pdf documents from command line:
 ```
-python3 -m virtualenv venv
+verba load --embedder CohereEmbedder --units 60 --overlap 10 --reader PDFReader --path ./data/leanovate/KanbanAndScrum-German.pdf
 ```
-
-3. **Install Verba**
-```
-pip install -e .
-```
-
-4. **Launch Verba**
-```
-verba start
-```
-
-5. **Access Verba**
-```
-Visit localhost:8000
-```
-
-6. **Create .env file and add environment variables**
 
 # 🔑 API Keys
 
@@ -347,6 +295,17 @@ If you want to use the Github Reader, you need the `GITHUB_TOKEN` environment va
 ```
 GITHUB_TOKEN=YOUR-GITHUB-TOKEN
 ```
+
+
+## Confluence
+If you want to use the ConfluenceReaders, you need the follwoing keys:
+
+```
+CONFLUENCE_API_KEY=XXXX
+CONFLUENCE_USER_EMAIL=XXX@leanovate.de
+CONFLUENCE_URL=https://leanovate.atlassian.net
+```
+
 
 ## Status Page
 

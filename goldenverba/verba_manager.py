@@ -403,9 +403,9 @@ class VerbaManager:
                 self.environment_variables["OPENAI_MODEL"]
             ):
                 raise EnvironmentError("Missing environment variables. When using Azure OpenAI, you need to set OPENAI_BASE_URL, AZURE_OPENAI_RESOURCE_NAME, AZURE_OPENAI_EMBEDDING_MODEL and OPENAI_MODEL. Please check documentation.")
-
-
-        
+        self.environment_variables["CONFLUENCE_API_KEY"] = "CONFLUENCE_API_KEY" in os.environ
+        self.environment_variables["CONFLUENCE_URL"] = "CONFLUENCE_URL" in os.environ
+        self.environment_variables["CONFLUENCE_USER_EMAIL"] = "CONFLUENCE_USER_EMAIL" in os.environ
 
     def get_schemas(self) -> dict:
         """

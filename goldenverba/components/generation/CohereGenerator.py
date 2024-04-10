@@ -49,7 +49,7 @@ class CohereGenerator(Generator):
                 return co.chat(
                     chat_history=_conversation,
                     message=message,
-                    model="command",
+                    model="command-r",
                     temperature=0.1,
                 )
 

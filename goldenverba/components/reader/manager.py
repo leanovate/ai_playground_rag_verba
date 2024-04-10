@@ -6,6 +6,7 @@ from goldenverba.components.reader.interface import Reader
 from goldenverba.components.reader.pdfreader import PDFReader
 from goldenverba.components.reader.simplereader import SimpleReader
 from goldenverba.components.reader.unstructuredpdf import UnstructuredPDF
+from goldenverba.components.reader.confluencereader import ConfluenceReader
 
 
 class ReaderManager:
@@ -15,6 +16,7 @@ class ReaderManager:
             "PDFReader": PDFReader(),
             "GithubReader": GithubReader(),
             "UnstructuredPDF": UnstructuredPDF(),
+            "ConfluenceReader": ConfluenceReader(),
         }
         self.selected_reader: Reader = self.readers["SimpleReader"]
 

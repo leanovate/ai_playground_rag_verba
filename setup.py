@@ -56,5 +56,10 @@ setup(
             "huggingface_hub",
             "accelerate",
         ],
+       "confluence": [
+            "atlassian-python-api",
+            "markdownify",
+        ],
+
     },
 )

@@ -14,7 +14,7 @@ class CohereEmbedder(Embedder):
         self.name = "CohereEmbedder"
         self.requires_env = ["COHERE_API_KEY"]
         self.description = (
-            "Embeds and retrieves objects using Cohere's embed-multilingual-v2.0 model"
+            "Embeds and retrieves objects using Cohere's embed-multilingual-v3.0 model"
         )
         self.vectorizer = "text2vec-cohere"
 
